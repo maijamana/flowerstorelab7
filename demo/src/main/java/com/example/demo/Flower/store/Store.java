@@ -1,0 +1,41 @@
+package com.example.demo.Flower.store;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Store {
+    private final List<FlowerBucket> buckets = new ArrayList<FlowerBucket>();
+
+    public Store() {
+    }
+
+    public void add(FlowerBucket flowerBucket) {
+        buckets.add(flowerBucket);
+    }
+
+    public List<FlowerPack> search(Flower flower) {
+        List<FlowerPack> ans = new ArrayList<FlowerPack>();
+        for (FlowerBucket bucket : buckets) {
+            for (FlowerPack pack : bucket.getPacks()) {
+                if ((pack.getFlower().getFlowerType()
+                        ==
+                        flower.getFlowerType())
+                        &&
+                        (pack.getFlower().getSepalLength()
+                                ==
+                                flower.getSepalLength())
+                        &&
+                        (pack.getFlower().getPrice()
+                                ==
+                                flower.getPrice())) {
+                    ans.add(pack);
+                }
+            }
+        }
+        return ans;
+    }
+
+    public boolean searchBool(Flower flower) {
+        return !this.search(flower).isEmpty();
+    }
+}
